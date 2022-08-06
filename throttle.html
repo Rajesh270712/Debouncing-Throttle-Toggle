@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <center>
+      <h1>Throttle</h1>
+      <button id="throttle"  >Click Me!</button>
+      <input type="text" id="searchThrottle" >
+    </center>
+  </body>
+
+  <script>
+        const throttleFunction = (func,delay) => {
+            let prev=0;
+
+            return (...args)=>{
+                let now= new Date().getTime();
+                console.log(now-prev)
+                if(now-prev>delay)
+                {
+                    prev=now
+                    return func(...args)
+                }
+            }
+        }
+
+        const throttleSearch = (func,delay) => {
+            let prev=0;
+            return (...args) => {
+                let now= new Date().getTime();
+                console.log(now-prev)
+                if(now-prev > delay){
+                    prev=now
+                    return func(...args)
+                }
+            }
+        }
+
+        let input=document.querySelector("#searchThrottle")
+        input.addEventListener("input",throttleSearch(()=>{
+            console.log(input.value)
+        },2000))
+
+        document.querySelector("#throttle").addEventListener("search",throttleFunction(()=>{
+            console.log("Button is Clicked")
+        },2000))
+
+      
+
+  </script>
+</html>

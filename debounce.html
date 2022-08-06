@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debounce</title>
+</head>
+<body>
+    <center><h1> Debounce Example </h1></center>
+    <center><input type="" id="searchInput"  oninput="debounce(fetchData, 1000)" ></center>
+    <center>
+        <label for="">
+            Input Value : 
+            <h3 id="inputValue" ></h3>
+        </label>
+    </center>
+</body>
+
+    <script>
+
+        let timerId;
+        function debounce(fetchData, delay)
+        {
+            if(timerId) clearTimeout(timerId);
+            timerId= setTimeout(()=>{
+                let input= document.querySelector("#searchInput").value;
+                fetchData(input)
+            },delay)
+        }
+
+        function fetchData(input){
+            document.querySelector("#inputValue").textContent= input
+        }
+    </script>
+</html>
